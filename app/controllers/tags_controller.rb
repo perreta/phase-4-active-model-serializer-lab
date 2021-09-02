@@ -7,8 +7,12 @@ class TagsController < ApplicationController
   end
 
   def show
-    tag = Tag.find(params[:id])
-    render json: tag
+    tag = Tag.find_by(id: params[:id])
+    if tag
+      render json: tag
+    else 
+      render json: { errors: "Tag not found" }
+    end
   end
 
   private
